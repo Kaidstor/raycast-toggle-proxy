@@ -32,15 +32,24 @@
   "preferences": [
     {
       "name": "host",
+      "required": false,
       "type": "textfield",
       "description": "proxy host",
       "title": "SOCKS Host"
     },
     {
       "name": "port",
+      "required": false,
       "type": "textfield",
       "description": "proxy port",
       "title": "SOCKS Port"
+    },
+    {
+      "name": "xrayPath",
+      "required": false,
+      "type": "textfield",
+      "description": "exec from",
+      "title": "Xray config path"
     }
   ],
   "dependencies": {

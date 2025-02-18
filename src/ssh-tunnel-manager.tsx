@@ -124,8 +124,6 @@ export default function SSHTunnelManager() {
          // Запускаем tmux
          const cmd = `new-session -d -s ${sessionName} "ssh -L ${t.localPort}:127.0.0.1:${t.remotePort} ${t.host} -N > ~/my-vpn.log 2>&1"`;
 
-         console.log(cmd);
-
          await tmux(cmd);
 
          // Добавляем в активные туннели
