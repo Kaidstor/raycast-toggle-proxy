@@ -55,7 +55,6 @@
   "dependencies": {
     "@raycast/api": "^1.88.4",
     "@raycast/utils": "^1.17.0",
-    "dotenv": "^16.4.7",
     "execa": "^9.5.2",
     "glob": "^11.0.0",
     "ssh-config": "^5.0.1"
