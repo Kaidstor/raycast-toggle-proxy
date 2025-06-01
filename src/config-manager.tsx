@@ -118,6 +118,32 @@ export default function ConfigManager() {
       loadConfigs();
    }, []);
 
+   const handleQuickDelete = async (config: ConfigItem) => {
+      if (!config.exists) {
+         showToast(Toast.Style.Failure, "Файл не существует");
+         return;
+      }
+
+      const confirmed = await confirmAlert({
+         title: "Удалить конфиг?",
+         message: `Вы уверены, что хотите удалить ${config.name}?`,
+         primaryAction: {
+            title: "Удалить",
+            style: Alert.ActionStyle.Destructive,
+         },
+      });
+
+      if (confirmed) {
+         try {
+            fs.unlinkSync(config.path);
+            showToast(Toast.Style.Success, `Конфиг ${config.name} удалён`);
+            loadConfigs(); // Обновляем список
+         } catch (error) {
+            showToast(Toast.Style.Failure, `Ошибка удаления: ${(error as Error).message}`);
+         }
+      }
+   };
+
    function ConfigDetailView({ config }: { config: ConfigItem }) {
       const [content, setContent] = useState<string>("");
       const [isEditing, setIsEditing] = useState(false);
@@ -257,6 +283,15 @@ export default function ConfigManager() {
                         icon={Icon.ArrowClockwise}
                         shortcut={{ modifiers: ["cmd"], key: "r" }}
                      />
+                     {config.exists && (
+                        <Action
+                           title="Удалить"
+                           onAction={() => handleQuickDelete(config)}
+                           icon={Icon.Trash}
+                           style={Action.Style.Destructive}
+                           shortcut={{ modifiers: ["ctrl"], key: "x" }}
+                        />
+                     )}
                   </ActionPanel>
                }
             />

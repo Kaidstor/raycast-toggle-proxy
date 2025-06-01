@@ -90,6 +90,12 @@ In the Raycast preferences for this extension, you can configure:
    - Open in external editor
    - Delete with confirmation
    - Copy path or content
+4. Use keyboard shortcuts:
+   - **Cmd+C** - Copy config path
+   - **Cmd+O** - Open in external editor
+   - **Cmd+Shift+O** - Open containing folder
+   - **Cmd+R** - Refresh config list
+   - **Cmd+K** - Quick delete config (with confirmation)
 
 ## Improvements in This Version
 
