@@ -1,11 +1,15 @@
 # Toggle Proxy Raycast Extension
 
-This extension allows you to easily toggle SOCKS proxy settings on macOS through the menu bar and generate Xray configurations from VLESS URLs.
+This extension allows you to easily toggle SOCKS proxy settings on macOS through the menu bar and manage Xray configurations.
 
 ## Features
 
 ### 1. Menu Bar Proxy Toggle
-Toggle SOCKS proxy settings directly from the macOS menu bar.
+Toggle SOCKS proxy settings directly from the macOS menu bar with:
+- **Multiple config selection** - Choose which config to run
+- **Improved startup logic** - Better handling of tmux sessions  
+- **Current config display** - See which config is currently running
+- **Automatic session management** - Stops old sessions when starting new ones
 
 ### 2. VLESS to Xray Config Generator
 Convert VLESS URLs to Xray JSON configurations with:
@@ -13,6 +17,14 @@ Convert VLESS URLs to Xray JSON configurations with:
 - **Custom routing rules**
 - **Support for additional countries, domains, and IPs**
 - **Integration with proxy settings**
+
+### 3. Config Manager
+Comprehensive config management with:
+- **View all configs** - See all JSON files in your Xray directory
+- **Edit configs** - Built-in editor for quick changes
+- **Config details** - File size, modification date, and content preview
+- **Delete configs** - Safe deletion with confirmation
+- **Open in external editor** - Integration with your preferred editor
 
 ## Prerequisites
 
@@ -45,9 +57,20 @@ In the Raycast preferences for this extension, you can configure:
 1. **SOCKS Host** - The host address for your SOCKS proxy (default: 127.0.0.1)
 2. **SOCKS Port** - The port for your SOCKS proxy (default: 1080)
 3. **Xray config path** - The path to your Xray configuration directory (used for both execution and saving generated configs, default: ~/xray)
+4. **Default Config** - The default config file to use (default: config.json)
+5. **Saved Configs** - Comma-separated list of config names to show in menu (e.g., config.json,server1.json,server2.json)
 
-## Using the Config Generator
+## Using the Extension
 
+### Menu Bar Proxy
+1. The menu bar icon shows proxy status (filled = enabled, outline = disabled)
+2. Hover to see current config name (if running)
+3. Click to see options:
+   - **Enable proxy (default)** - Start with default config
+   - **Choose config** - Select from saved configs list
+   - **Disable proxy** - Stop proxy and tmux sessions
+
+### Config Generator
 1. Open the "Vless URL To Json" command
 2. Paste your VLESS URL in the text area
 3. Optionally customize:
@@ -58,11 +81,30 @@ In the Raycast preferences for this extension, you can configure:
    - **Additional IPs** (e.g., 192.168.1.0/24,10.0.0.0/8)
 4. Click "Generate and Save Config"
 
-The config will be automatically saved to your specified directory (creates the directory if it doesn't exist) and displayed with options to:
-- Copy the config to clipboard
-- Copy the file path
-- Open the containing folder
-- Create a new config
+### Config Manager
+1. Open the "Config Manager" command
+2. View all configs with status indicators
+3. Click on any config to:
+   - View details and content
+   - Edit in built-in editor
+   - Open in external editor
+   - Delete with confirmation
+   - Copy path or content
+
+## Improvements in This Version
+
+### Fixed tmux startup issues:
+- **Better session detection** - Checks if tmux session actually started
+- **Retry logic** - Waits up to 15 attempts for proxy to start
+- **Session cleanup** - Stops old sessions before starting new ones
+- **Improved error logging** - Captures tmux session output for debugging
+
+### Enhanced config management:
+- **Visual config selection** - See all available configs in menu
+- **Current config tracking** - Always know which config is running
+- **File existence checking** - See which configs exist vs. are just saved names
+- **Integrated editor** - Edit configs without leaving Raycast
+- **Smart caching** - Uses Raycast Cache API for efficient config scanning with 30-second LRU cache
 
 ## Troubleshooting
 
@@ -83,6 +125,14 @@ If you see an error message saying "Tmux не установлен или не �
    sudo ln -s $(which tmux) /usr/local/bin/tmux
    ```
 
+### Proxy startup issues
+
+If the proxy fails to start:
+1. Check that your config file exists and is valid JSON
+2. Check the logs for detailed error messages
+3. Try starting xray manually to see error output
+4. Ensure the port isn't already in use
+
 ### Checking logs
 
 If you encounter issues, you can check the logs in the Raycast support directory:
@@ -94,7 +144,7 @@ If you encounter issues, you can check the logs in the Raycast support directory
 The logs include:
 - `tmux-errors.log` - Errors related to tmux execution
 - `tmux-check.log` - Logs from checking if tmux is installed
-- `proxy-errors.log` - Errors related to proxy setup
+- `proxy-errors.log` - Errors related to proxy setup and tmux session output
 
 ## Support
 

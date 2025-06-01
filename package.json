@@ -27,6 +27,12 @@
       "title": "Tunnel Manager",
       "description": "Manage your connections",
       "mode": "view"
+    },
+    {
+      "name": "config-manager",
+      "title": "Config Manager",
+      "description": "Manage Xray configurations",
+      "mode": "view"
     }
   ],
   "preferences": [
@@ -51,6 +57,14 @@
       "description": "exec from",
       "title": "Xray config path",
       "default": "~/xray"
+    },
+    {
+      "name": "defaultConfig",
+      "required": false,
+      "type": "textfield",
+      "description": "Default config file name",
+      "title": "Default Config",
+      "default": "config.json"
     }
   ],
   "dependencies": {
