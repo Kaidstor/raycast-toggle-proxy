@@ -1,6 +1,18 @@
 # Toggle Proxy Raycast Extension
 
-This extension allows you to easily toggle SOCKS proxy settings on macOS through the menu bar.
+This extension allows you to easily toggle SOCKS proxy settings on macOS through the menu bar and generate Xray configurations from VLESS URLs.
+
+## Features
+
+### 1. Menu Bar Proxy Toggle
+Toggle SOCKS proxy settings directly from the macOS menu bar.
+
+### 2. VLESS to Xray Config Generator
+Convert VLESS URLs to Xray JSON configurations with:
+- **Automatic saving to specified directory**
+- **Custom routing rules**
+- **Support for additional countries, domains, and IPs**
+- **Integration with proxy settings**
 
 ## Prerequisites
 
@@ -32,7 +44,25 @@ In the Raycast preferences for this extension, you can configure:
 
 1. **SOCKS Host** - The host address for your SOCKS proxy (default: 127.0.0.1)
 2. **SOCKS Port** - The port for your SOCKS proxy (default: 1080)
-3. **Xray config path** - The path to your Xray configuration directory
+3. **Xray config path** - The path to your Xray configuration directory (used for both execution and saving generated configs, default: ~/xray)
+
+## Using the Config Generator
+
+1. Open the "Vless URL To Json" command
+2. Paste your VLESS URL in the text area
+3. Optionally customize:
+   - **File name** for the config (default: config.json)
+   - **Routing mode** (default or custom)
+   - **Additional countries** (e.g., us,uk,de)
+   - **Additional domains** (e.g., example.com,test.org)
+   - **Additional IPs** (e.g., 192.168.1.0/24,10.0.0.0/8)
+4. Click "Generate and Save Config"
+
+The config will be automatically saved to your specified directory (creates the directory if it doesn't exist) and displayed with options to:
+- Copy the config to clipboard
+- Copy the file path
+- Open the containing folder
+- Create a new config
 
 ## Troubleshooting
 

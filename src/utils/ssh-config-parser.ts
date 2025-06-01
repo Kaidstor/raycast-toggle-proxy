@@ -1,4 +1,3 @@
-
 import * as glob from "glob";
 import fs from "fs";
 import path from "path";
@@ -25,11 +24,7 @@ export function loadFullSshConfig(configPath?: string): SshHostEntry[] {
 /**
  * Рекурсивно собирает Host-секции из указанного файла + подключаемых по Include.
  */
-function collectHostsRecursive(
-  filePath: string,
-  accumulatedHosts: SshHostEntry[],
-  visitedPaths: Set<string>
-) {
+function collectHostsRecursive(filePath: string, accumulatedHosts: SshHostEntry[], visitedPaths: Set<string>) {
   const fullPath = path.resolve(filePath);
   if (!fs.existsSync(fullPath)) {
     return;

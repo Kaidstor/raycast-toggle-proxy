@@ -3,7 +3,7 @@ import * as fs from "fs";
 import * as path from "path";
 import { environment } from "@raycast/api";
 
-const PATH = '/usr/local/bin:/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin'
+const PATH = "/usr/local/bin:/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin";
 // Use environment.supportPath for logs
 const logPath = path.join(environment.supportPath, "logs");
 
@@ -20,7 +20,7 @@ try {
 function logError(message: string, error: unknown) {
   const timestamp = new Date().toISOString();
   const logMessage = `${timestamp} - ${message}: ${JSON.stringify(error)}\n`;
-  
+
   try {
     fs.appendFileSync(path.join(logPath, "tmux-errors.log"), logMessage);
   } catch (e) {
@@ -32,12 +32,8 @@ function logError(message: string, error: unknown) {
 async function getTmuxPath(): Promise<string> {
   try {
     // Try to find tmux in common locations
-    const possiblePaths = [
-      "/usr/bin/tmux",
-      "/usr/local/bin/tmux",
-      "/opt/homebrew/bin/tmux"
-    ];
-    
+    const possiblePaths = ["/usr/bin/tmux", "/usr/local/bin/tmux", "/opt/homebrew/bin/tmux"];
+
     for (const tmuxPath of possiblePaths) {
       try {
         if (fs.existsSync(tmuxPath)) {
@@ -47,19 +43,19 @@ async function getTmuxPath(): Promise<string> {
         // Continue checking other paths
       }
     }
-    
+
     // If not found in common locations, try which command
-    const { stdout } = await execaCommand("which tmux", { 
+    const { stdout } = await execaCommand("which tmux", {
       shell: true,
-      env: { 
-        PATH: process.env.PATH || "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/homebrew/bin"
-      }
+      env: {
+        PATH: process.env.PATH || "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/homebrew/bin",
+      },
     });
-    
+
     if (stdout.trim()) {
       return stdout.trim();
     }
-    
+
     throw new Error("tmux not found in PATH");
   } catch (error) {
     logError("Failed to find tmux", error);
@@ -70,12 +66,12 @@ async function getTmuxPath(): Promise<string> {
 export async function tmux(command: string) {
   try {
     const tmuxPath = await getTmuxPath();
-    const result = await execaCommand(`${tmuxPath} ${command}`, { 
+    const result = await execaCommand(`${tmuxPath} ${command}`, {
       shell: true,
       env: {
         ...process.env,
-        PATH: process.env.PATH || "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/homebrew/bin"
-      }
+        PATH: process.env.PATH || "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/homebrew/bin",
+      },
     });
     return result;
   } catch (error) {
@@ -86,10 +82,10 @@ export async function tmux(command: string) {
 
 export async function execWithEnv(string: string) {
   console.log(process.env.PATH);
-    return await execaCommand(string, { 
-      env: {
-        ...process.env,
-        PATH
-      }
-    });
+  return await execaCommand(string, {
+    env: {
+      ...process.env,
+      PATH,
+    },
+  });
 }
