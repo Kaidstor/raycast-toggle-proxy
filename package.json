@@ -53,19 +53,19 @@
     }
   ],
   "dependencies": {
-    "@raycast/api": "^1.88.4",
-    "@raycast/utils": "^1.17.0",
-    "execa": "^9.5.2",
-    "glob": "^11.0.0",
-    "ssh-config": "^5.0.1"
+    "@raycast/api": "^1.99.3",
+    "@raycast/utils": "^1.19.1",
+    "execa": "^9.6.0",
+    "glob": "^11.0.2",
+    "ssh-config": "^5.0.3"
   },
   "devDependencies": {
-    "@raycast/eslint-config": "^1.0.11",
-    "@types/node": "20.8.10",
-    "@types/react": "18.3.3",
-    "eslint": "^8.57.0",
-    "prettier": "^3.3.3",
-    "typescript": "^5.4.5"
+    "@raycast/eslint-config": "^2.0.4",
+    "@types/node": "22.15.29",
+    "@types/react": "19.1.6",
+    "eslint": "^9.28.0",
+    "prettier": "^3.5.3",
+    "typescript": "^5.8.3"
   },
   "scripts": {
     "build": "ray build",
