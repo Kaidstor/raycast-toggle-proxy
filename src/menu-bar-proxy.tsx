@@ -313,7 +313,7 @@ export default function MenuBarProxy() {
                   {availableConfigs.map((config) => (
                      <MenuBarExtra.Item
                         key={config}
-                        title={`${currentConfig === config.replace('.json', '') ? '⭐ ' : ''}${config}`}
+                        title={config}
                         onAction={() => toggleProxy(config)}
                         icon={config === prefs.defaultConfig ? Icon.Star : Icon.Document}
                      />
